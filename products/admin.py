@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Category
+from .models import Product, Category, Location
 
 # Register your models here.
 @admin.register(Category)
@@ -12,3 +12,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ("name", "category", "price", "stock", "created_at")
     list_filter = ("category",)
     search_fields = ("name", "description")
+
+@admin.register(Location)
+class LocationAdmin(admin.ModelAdmin):
+    list_display = ("name", "city", "address")

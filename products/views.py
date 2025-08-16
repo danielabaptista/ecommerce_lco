@@ -12,9 +12,14 @@ class ProductListView(generics.ListAPIView):
 
     def get_queryset(self):
         queryset = Product.objects.all()
-        category = self.request.query_params.get('category')
-        if category:
-            queryset = queryset.filter(category__slug=category)
+        category_id = self.request.query_params.get('category')
+        location_id = self.request.query_params.get('location')
+
+        if category_id:
+            queryset = queryset.filter(category_id=category_id)
+        if location_id:
+            queryset = queryset.filter(locations__id=location_id) 
+
         return queryset
 
 
