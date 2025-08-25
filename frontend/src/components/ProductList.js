@@ -17,7 +17,7 @@ function ProductList() {
       {products.map((product) => (
         <div key={product.id} className="bg-white shadow-md rounded-lg overflow-hidden">
           <img
-            src={product.image || "/placeholder.png"} // fallback image if none
+            src={product.image || "/placeholder.png"}
             alt={product.name}
             className="w-full h-48 object-cover"
           />
@@ -25,6 +25,20 @@ function ProductList() {
             <h3 className="text-lg font-semibold">{product.name}</h3>
             <p className="text-gray-600">{product.description}</p>
             <p className="text-blue-600 font-bold mt-2">${product.price}</p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {product.locations && product.locations.length > 0 ? (
+                  product.locations.map((loc) => (
+                    <span
+                      key={loc.id}
+                      className="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full"
+                    >
+                      {loc.name} ({loc.city})
+                    </span>
+                  ))
+                ) : (
+                  <span className="text-xs text-gray-400">No location</span>
+                )}
+              </div>
             <button
               onClick={() => addToCart(product)}
               className="mt-3 w-full bg-green-500 text-white py-2 rounded hover:bg-green-600"
