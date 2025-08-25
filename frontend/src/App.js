@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ProductList from "./components/ProductList";
+import { CartContext } from "./context/CartContext";
 import { Search, User, ShoppingCart, X } from "lucide-react";
 
 function App() {
   const [showSearch, setShowSearch] = useState(false);
+
+  // Get cart from context
+  const { cart } = useContext(CartContext);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -52,7 +56,7 @@ function App() {
             <button className="relative text-gray-600 hover:text-blue-500">
               <ShoppingCart className="w-6 h-6" />
               <span className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                0
+                {cart.reduce((acc, item) => acc + item.quantity, 0)}
               </span>
             </button>
           </div>
